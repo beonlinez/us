@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" href="./assets/img/logo.svg">
+<title>Table Tennis 3D — TTable Tennis 3D Online</title>
+<meta name="description" content="Table Tennis 3D is a modern, interactive table tennis platform with realistic physics and live gameplay.">
+<meta property="og:title" content="Table Tennis 3D — TTable Tennis 3D Online">
+<meta property="og:description" content="Play TTable Tennis 3D Online. Fast loads, mobile-first, no installs required.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="./assets/img/logo.svg">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Table Tennis 3D — Play TTable Tennis 3D Online">
+<meta name="twitter:description" content="The ultimate browser-based TTable Tennis 3D with realistic physics and multiplayer action.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', Arial, sans-serif;
+  background: linear-gradient(135deg, #141428 0%, #23234a 50%, #1e1e3a 100%);
+  min-height: 100vh;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+.nav {
+  background: rgba(20, 20, 40, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.nav-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: #fff;
+  text-decoration: none;
+}
+
+.menu {
+  display: flex;
+  gap: 2rem;
+}
+
+.menu a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.menu a:hover {
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.btn {
+  background: linear-gradient(45deg, #5a4fff, #4fd1c5);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(79, 70, 229, 0.5);
+}
+
+.btn.ghost {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: none;
+}
+
+.btn.ghost:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.hero {
+  padding: 6rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 30% 20%, rgba(79, 70, 229, 0.1) 0%, transparent 50%),
+              radial-gradient(circle at 70% 80%, rgba(124, 58, 237, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: stretch;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.badge {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.75rem 1.5rem;
+  border-radius: 2rem;
+  font-size: 1.1rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: inline-block;
+  width: fit-content;
+  backdrop-filter: blur(10px);
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  background: linear-gradient(45deg, #f3f3fa, #b3b3d1, #5a4fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0;
+}
+
+.hero p {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+  max-width: 500px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.kudos {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.pill {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.5rem 1rem;
+  border-radius: 1.5rem;
+  font-size: 0.875rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(5px);
+}
+
+.hero-visual {
+  background: linear-gradient(160deg, #23234a 60%, #4fd1c5 100%);
+  border-radius: 1rem;
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-visual::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-icon {
+  font-size: 5rem;
+  position: relative;
+  z-index: 1;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.stat {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.stat .n {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 0.25rem;
+}
+
+.stat .t {
+  font-size: 1rem;
+  opacity: 0.9;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.section {
+  padding: 4rem 0;
+}
+
+.section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  background: linear-gradient(45deg, #f3f3fa, #b3b3d1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.showcase {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.tile {
+  padding: 2rem;
+  border-radius: 1rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tile:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.tile .cap {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  opacity: 0.9;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 1rem;
+  padding: 3rem 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  text-align: center;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-row label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.form-row input,
+textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-family: inherit;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.form-row input:focus,
+textarea:focus {
+  outline: none;
+  border-color: #5a4fff;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.footer {
+  background: rgba(20, 20, 40, 0.95);
+  padding: 2rem 0;
+  margin-top: 4rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.footer-badge {
+  background: linear-gradient(45deg, #5a4fff, #4fd1c5);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+  
+  .menu {
+    display: none;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .hero {
+    padding: 4rem 0;
+  }
+  
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 1rem;
+  }
+  
+  .hero h1 {
+    font-size: 2rem;
+  }
+  
+  .hero-actions {
+    flex-direction: column;
+  }
+  
+  .showcase {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="container nav-inner">
+    <a class="logo" href="index.html" aria-label="Home" style="display:flex;align-items:center;gap:10px;min-width:160px;">
+      <img src="assets/img/logo.svg" alt="Table Tennis 3D logo" style="height:40px;background:#fff;border-radius:4px;">
+      <span style="color:#fff;font-size:1.5rem;font-weight:800;line-height:1.1;letter-spacing:-1px;">Table Tennis<br>3D</span>
+    </a>
+  <div class="menu" data-nav-menu style="flex:1;justify-content:center;gap:20px;flex-wrap:nowrap;">
+      <a href="index.html" style="opacity:1;font-weight:800">Home</a>
+      <a href="game.html">Play Game</a>
+      <a href="leaderboard.html">Leaderboard</a>
+      <a href="about.html">About</a>
+      <a href="blog.html">Blog</a>
+      <a href="faq.html">FAQ</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </div>
+    <div class="right">
+      <a class="btn ghost" data-nav-toggle>Menu</a>
+      <a class="btn" href="game.html">Play</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container grid">
+    <div class="hero-content">
+      <div class="badge">Table Tennis 3D — Play Like a Pro</div>
+      <h1>The Ultimate 3D Table Tennis Experience</h1>
+      <p>Challenge AI opponents, master spin techniques, and dominate the table with realistic physics. Enjoy smooth gameplay, particle effects, and immersive 3D graphics.</p>
+      <div class="hero-actions">
+        <a class="btn" href="game.html">Play Now</a>
+        <a class="btn ghost" href="blog.html">Table Tennis Tips & News</a>
+      </div>
+      <div class="kudos">
+        <span class="pill">🏓 Realistic Physics</span>
+        <span class="pill">🎯 Spin Control</span>
+        <span class="pill">⚡ Fast Action</span>
+        <span class="pill">🤖 Smart AI</span>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-icon">🏓</div>
+      <div class="stat">
+        <div class="n">3D</div>
+        <div class="t">Immersive Table</div>
+      </div>
+      <div class="stat">
+        <div class="n">11</div>
+        <div class="t">Points to Win</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="section container">
+  <h2>Master TTable Tennis 3D</h2>
+  <div class="showcase">
+  <div class="tile" style="background:linear-gradient(120deg,#4fd1c5 60%,#5a4fff 100%);color:#fff;">
+      <div class="cap">Pro Strategy</div>
+      <div style="padding:18px 0 0 0;font-size:1.5em;">Master the spin serve:</div>
+      <div style="font-size:2.2em;padding:12px 0;">🏓 ↗️ 🔄</div>
+      <div style="font-size:1em;">Angle your paddle for deadly topspin shots!</div>
+    </div>
+  <div class="tile" style="background:linear-gradient(120deg,#5a4fff 60%,#4fd1c5 100%);color:#222;">
+      <div class="cap">Champion Tip</div>
+      <div style="padding:18px 0 0 0;font-size:1.2em;">Watch the ball trail to predict opponent moves and counter-attack effectively.</div>
+    </div>
+  <div class="tile" style="background:linear-gradient(120deg,#5a4fff 60%,#4fd1c5 100%);color:#fff;">
+      <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle,rgba(255,255,255,0.1) 0%,transparent 70%);"></div>
+      <div class="cap" style="position:relative;z-index:1;">Live Matches</div>
+      <div style="font-size:2.5em;margin:1rem 0;position:relative;z-index:1;">⚡</div>
+      <div style="position:relative;z-index:1;">Real-time physics & AI opponents</div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="section container">
+  <div class="card">
+    <h2 style="margin-bottom:1rem;">Let's Connect</h2>
+    <p style="margin-bottom:2rem;font-size:1.1rem;">Have feedback, table tennis tournament ideas, or suggestions for new features? We'd love to hear from you!</p>
+    <form id="contact-form" style="max-width:720px;margin:0 auto;text-align:left">
+      <div class="form-row">
+        <div>
+          <label>Name</label>
+          <input name="name" required placeholder="Ping Pong Pro">
+        </div>
+        <div>
+          <label>Email</label>
+          <input name="email" required type="email" placeholder="you@tabletennis3d.com">
+        </div>
+      </div>
+      <div style="margin-bottom:1.5rem;">
+        <label style="display:block;margin-bottom:0.5rem;font-weight:600;">Message</label>
+        <textarea name="message" rows="4" placeholder="Share your thoughts on the ultimate TTable Tennis 3D experience!"></textarea>
+      </div>
+      <button class="btn" type="submit" style="width:100%;">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container footer-content">
+    <div>© 2025 TTable Tennis 3D Online. All rights reserved.</div>
+    <div class="footer-badge">3D Physics • Responsive • Family-friendly</div>
+  </div>
+</footer>
+
+<script>
+// Contact form handling
+document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Get form data
+    const formData = new FormData(this);
+    const name = formData.get('name');
+    const email = formData.get('email');
+    const message = formData.get('message');
+    
+    // Simple validation
+    if (!name || !email || !message) {
+        alert('Please fill in all fields.');
+        return;
+    }
+    
+    // Simulate form submission
+    const submitBtn = this.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    
+    submitBtn.textContent = 'Sending...';
+    submitBtn.disabled = true;
+    
+    setTimeout(() => {
+        alert('Thank you for your message! We\'ll get back to you soon.');
+        this.reset();
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+    }, 1500);
+});
+
+// Smooth scrolling for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
+// Add floating animation to hero icon
+const heroIcon = document.querySelector('.hero-icon');
+if (heroIcon) {
+    let angle = 0;
+    setInterval(() => {
+        angle += 0.02;
+        heroIcon.style.transform = `translateY(${Math.sin(angle) * 5}px) rotate(${Math.cos(angle * 0.5) * 2}deg)`;
+    }, 50);
+}
+
+// Mobile menu toggle (if you want to add this functionality)
+const navToggle = document.querySelector('[data-nav-toggle]');
+const navMenu = document.querySelector('[data-nav-menu]');
+
+if (navToggle && navMenu) {
+    navToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        navMenu.classList.toggle('active');
+    });
+}
+</script>
+</div></div></footer><script src="assets/js/main.js"></script></body></html>

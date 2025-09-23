@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" href="./assets/img/logo.svg">
+<title>3D TT — Live Table Tennis</title>
+<meta name="description" content="Table Tennis 3D is a modern, interactive table tennis platform with realistic physics and live gameplay.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', Arial, sans-serif;
+  background: linear-gradient(135deg, #141428 0%, #23234a 50%, #1e1e3a 100%);
+  min-height: 100vh;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+.nav {
+  background: rgba(20, 20, 40, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.nav-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: #fff;
+  text-decoration: none;
+}
+
+.menu {
+  display: flex;
+  gap: 2rem;
+}
+
+.menu a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.menu a:hover {
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.btn {
+  background: linear-gradient(45deg, #5a4fff, #4fd1c5);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(79, 70, 229, 0.5);
+}
+
+.hero {
+  text-align: center;
+  padding: 4rem 0;
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  background: linear-gradient(45deg, #f3f3fa, #b3b3d1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero p {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.kudos {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.pill {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.875rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.section {
+  padding: 2rem 0;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 1rem;
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.game-container {
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  background: linear-gradient(160deg, #23234a 60%, #4fd1c5 100%);
+  border-radius: 1rem;
+  padding: 2rem;
+}
+
+#gameCanvas {
+  width: 100%;
+  max-width: 960px;
+  border-radius: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: linear-gradient(180deg, #141428, #23234a);
+  box-shadow: 0 0 50px rgba(79, 70, 229, 0.3);
+  cursor: none;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.game-info {
+  margin-top: 1.5rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1.1rem;
+}
+
+.scoreboard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 0;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.player-score {
+  text-align: center;
+}
+
+.player-score h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.score {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #5a4fff;
+}
+
+.vs {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.badge {
+  background: linear-gradient(45deg, #5a4fff, #4fd1c5);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  display: inline-block;
+  margin: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+  
+  .menu {
+    display: none;
+  }
+  
+  .controls {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="container nav-inner">
+    <a class="logo" href="index.html" aria-label="Home" style="display:flex;align-items:center;gap:10px;min-width:160px;">
+      <img src="assets/img/logo.svg" alt="Table Tennis 3D logo" style="height:40px;background:#fff;border-radius:4px;">
+      <span style="color:#fff;font-size:1.5rem;font-weight:800;line-height:1.1;letter-spacing:-1px;">Table Tennis<br>3D</span>
+    </a>
+  <div class="menu" data-nav-menu style="flex:1;justify-content:center;gap:20px;flex-wrap:nowrap;">
+      <a href="index.html">Home</a>
+      <a href="game.html" style="opacity:1;font-weight:800">Play Game</a>
+      <a href="leaderboard.html">Leaderboard</a>
+      <a href="about.html">About</a>
+      <a href="blog.html">Blog</a>
+      <a href="faq.html">FAQ</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </div>
+    <div class="right">
+      <a class="btn" href="game.html">Play</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <h1>Table Tennis 3D — Live Table Tennis</h1>
+    <p>Experience the thrill of table tennis with realistic physics, smooth gameplay, and stunning visual effects. Challenge yourself against AI or play with friends!</p>
+    <div class="kudos">
+      <span class="pill">🏓 Realistic Physics</span>
+      <span class="pill">🎮 Smooth Controls</span>
+      <span class="pill">⚡ Fast-Paced Action</span>
+      <span class="pill">🏆 Score Tracking</span>
+    </div>
+  </div>
+</header>
+
+<section class="section container">
+  <div class="card game-container">
+    <div class="scoreboard">
+      <div class="player-score">
+        <h3>Player</h3>
+        <div class="score" id="playerScore">0</div>
+      </div>
+      <div class="vs">VS</div>
+      <div class="player-score">
+        <h3>AI Opponent</h3>
+        <div class="score" id="aiScore">0</div>
+      </div>
+    </div>
+    
+    <canvas id="gameCanvas" width="960" height="540"></canvas>
+    
+    <div class="controls">
+      <button class="btn" id="newGameBtn">New Game</button>
+      <button class="btn" id="pauseBtn">Pause</button>
+      <button class="btn" id="resetBtn">Reset Score</button>
+    </div>
+    
+    <div class="game-info">
+      <strong>How to Play:</strong> Move your mouse to control the paddle. Hit the ball to score points against your AI opponent. First to 11 points wins!
+    </div>
+    
+    <div style="margin-top: 1.5rem;">
+      <div class="badge">🎯 Pro Tip: Angle your paddle to add spin to the ball!</div>
+  <div class="badge" style="background: linear-gradient(45deg, #5a4fff, #4fd1c5); margin-top: 0.5rem;">
+        🚀 Challenge: Can you beat the AI 11-0?
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<script src="assets/js/game.js"></script>
+</body>
+</html>
+<footer class="footer"><div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+<div>© 2025 Table Tennis 3D — Chess 3D. All rights reserved.</div><div style="display:flex;gap:12px;align-items:center"><span class="badge">3D UI • Responsive • Age-gate</span></div>
+</div></footer><script src="assets/js/main.js"></script></body></html>
